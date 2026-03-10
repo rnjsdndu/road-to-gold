@@ -1,0 +1,321 @@
+*{margin: 0; padding: 0; box-sizing: border-box; list-style: none; color: inherit; text-decoration: none;}
+
+.container{width: 1520px; margin: 0 auto;}
+
+.flex{display: flex;}
+.abs{position: absolute;}
+.rel{position: relative;}
+.w100{width: 100%;}
+
+header{position: relative; z-index: 100;}
+header .container{display: flex; justify-content: space-between; max-height: 50px;}
+nav a{display: block; text-align: center;}
+nav > ul{display: flex; gap: 20px;}
+nav span{ transition: .5s; line-height: 10px; text-align: center; background-color: rgb(0, 0, 0); color: white; width: 10px; height: 10px;}
+nav > ul > li > input:focus ~ span:nth-child(4){opacity: 0;}
+nav > ul > li > input:focus ~ span{ transform: rotate(180deg);}
+nav .sub{height: 0px; overflow: hidden; transition: .4s;}
+nav input{position: absolute; top: 0; left: 0; width: 100%; height: 20px; opacity: 0; z-index: 2; cursor: pointer;}
+nav input:focus ~ .sub{height: 100px;}
+nav > ul > li > label:hover , nav > ul > li > a:hover{color: red;}
+nav > ul > li:not(:hover) input{animation: killFocus 0.001s forwards;} 
+
+@keyframes killFocus {
+  0%{display: none;}
+  100%{display: block;}
+}
+
+header .util > label:hover{font-weight: bold;}
+#loginPopupInput:checked ~ .loginPopup{display: flex;}
+.loginPopup{display: none; align-items: center; justify-content: center; z-index: 9999; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.445); position: fixed; top: 0; left: 0;}
+.loginPopupContent {background-color: white; display: flex; flex-direction: column; align-items: center; gap: 20px;}
+
+
+#guideModalInput:checked ~ .guideModal{display: flex;}
+#guideModalInput:checked ~ .guideModal .guideModalContent{animation: guideModal 999999999s ease-in-out; width: 600px; background-color: white;}
+.guideModal .guideModalContent{ height: 0px; transition: 1s; overflow: hidden;}
+.guideModal{position: fixed; z-index: 9999; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.438); display: none; justify-content: center; align-items: center; width: 100vw; height: 100vh;}
+.guideModal label{width: 10px; height: 10px; border: 1px solid black; padding: 10px; cursor: pointer; transition: .3s;}
+.guideModal label:hover{border: 1px solid black; padding: 10px; cursor: pointer;}
+
+@keyframes guideModal {
+  .0000001%{height: 600px;}
+}
+
+#visual .slideBox{width: 100%; height: 100vh; overflow: hidden;}
+#visual .slide{width: 400%; height: 100%; display: flex; animation: slide 10s linear infinite;}
+#visual li{width: 100%; height: 100%; display: flex;}
+#visual img{object-fit: cover;}
+#visual img{width: 100%; height: 100%;}
+
+@keyframes slide {
+    0%{margin-left: -0%;}
+    30%{margin-left: -0%;}
+    33%{margin-left: -100%;}
+    63%{margin-left: -100%;}
+    66%{margin-left: -200%;}
+    96%{margin-left: -200%;}
+    99%{margin-left: -300%;}
+    99.99999999%{margin-left: -300%;}
+}
+
+
+.prograssBar{position: absolute; bottom: 50px; gap: 20px; right: 200px; width: 700px; height: 10px; display: flex; justify-content: space-between;}
+.prograssBar li .bar{animation: prograss 10s linear infinite; background-color: red; width: 0%; height: 100%; border-radius: 1000px;}
+
+.prograssBar li:nth-child(1) .bar{animation-delay: 0s;}
+.prograssBar li:nth-child(2) .bar{animation-delay: 3.33s;}
+.prograssBar li:nth-child(3) .bar{animation-delay: 6.66s;}
+
+#visual > div > .slide:hover{animation-play-state: paused;}
+#visual .slideBox:hover .prograssBar .bar{animation-play-state: paused;}
+
+@keyframes prograss {
+    0%{width: 0;}
+    30%{width: 100%; opacity: 1;}
+    33%{width: 100%; opacity: 0;}
+    100%{width: 100%; opacity: 0;}
+}
+
+.newsTab{gap: 20px; }
+.newsTab label{padding: 10px; border: 1px solid black;}
+.newsTab label:hover{padding: 10px; color: white; background-color: black;}
+
+.newsContent ul{display: none;}
+
+#news #normal:checked ~ .newsTab label[for="normal"]{color: white; background-color: black;}
+#news #normal:checked ~ .newsContent .normal{display: block;}
+#news #event:checked ~ .newsTab label[for="event"]{color: white; background-color: black;}
+#news #event:checked ~ .newsContent .event{display: block;}
+#news #job:checked ~ .newsTab label[for="job"]{color: white; background-color: black;}
+#news #job:checked ~ .newsContent .job{display: block;}
+
+#favoriteMenu .container{display: flex; justify-content: space-between;}
+#favoriteMenu .container div{width: 100px; height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;}
+
+#program input{display: none;}
+#program .container{display: grid; grid-template-columns: repeat(4,1fr); gap: 20px;}
+#program .container > label{width: 300px; height: 300px; position: relative;}
+#program .container > label > img{width: 100%; height: 100%; object-fit: cover;}
+#program .container > label > div{ cursor: pointer; width: 100%; opacity: 0; transition: .5s; height: 100%; position: absolute; top: 0; left: 0; background-color: rgba(0, 0, 0, 0.623); color: white; display: flex; align-items: center; justify-content: center;}
+
+#program .container > label:hover > div{opacity: 1;}
+.item{transition: .3s;}#program .container:has(.item:hover) .item:hover{scale: 1.05;}
+#program .container:has(.item:hover) .item:not(:hover){scale: .9;}
+
+#program #programOne:checked ~ .programModalOne{display: block;}
+#program #programTwo:checked ~ .programModalTwo{display: block;}
+#program #programThree:checked ~ .programModalThree{display: block;}
+#program #programFour:checked ~ .programModalFour{display: block;}
+#program #programFive:checked ~ .programModalFive{display: block;}
+#program #programSix:checked ~ .programModalSix{display: block;}
+#program #programSeven:checked ~ .programModalSeven{display: block;}
+#program #programEight:checked ~ .programModalEight{display: block;}
+
+.programModal{background-color: rgba(0, 0, 0, 0.445); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: none; justify-content: center; align-items: center;}
+.programModalContent {width: 500px; height: 700px; background-color: white;}
+.programModalContent img{width: 80%; height: 80%; filter: brightness(100%);}
+
+#calander .grid {display: grid; grid-template-columns: repeat(7,1fr); grid-auto-rows:150px;}
+#calander .grid > div{display: flex; flex-direction: column; border: 1px solid black; padding: 8px; overflow-y: auto;}
+#calander .grid > div > span{display: block; width: 100%; text-overflow: ellipsis; overflow: hidden;  white-space: nowrap;}
+
+#recommendBook .bookImage{width: 350px; height: 500px; overflow: hidden;}
+#recommendBook ul{display: flex; width: 700%; height: 100%; transition: .3s;}
+#recommendBook li{width: 100%; height: 100%;}
+#recommendBook .bookImage img{width: 100%; height: 100%; object-fit: cover;}
+#recommendBook label{width: 50px; height: 50px; background-color: white;}
+
+.prev label,
+.next label{
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+
+#one:checked ~ .flex > .prev label[for="seven"],
+#one:checked ~ .flex > .next label[for="two"],
+#two:checked ~ .flex > .prev label[for="one"],
+#two:checked ~ .flex > .next label[for="three"],
+#three:checked ~ .flex > .prev label[for="two"],
+#three:checked ~ .flex > .next label[for="four"],
+#four:checked ~ .flex > .prev label[for="three"],
+#four:checked ~ .flex > .next label[for="five"],
+#five:checked ~ .flex > .prev label[for="four"],
+#five:checked ~ .flex > .next label[for="six"],
+#six:checked ~ .flex > .prev label[for="five"],
+#six:checked ~ .flex > .next label[for="seven"],
+#seven:checked ~ .flex > .prev label[for="six"],
+#seven:checked ~ .flex > .next label[for="one"]{
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 100;
+}
+
+#two:checked ~ .flex > .bookImage > ul{margin-left: -100%;}
+#three:checked ~ .flex > .bookImage > ul{margin-left: -200%;}
+#four:checked ~ .flex > .bookImage > ul{margin-left: -300%;}
+#five:checked ~ .flex > .bookImage > ul{margin-left: -400%;}
+#six:checked ~ .flex > .bookImage > ul{margin-left: -500%;}
+#seven:checked ~ .flex > .bookImage > ul{margin-left: -600%;}
+
+#recommendBook > .flex > .rel{top: 250px;}
+#recommendBook > .flex > .prev{left: -50px;}
+
+#recommendBook input{display: none;}
+
+#recommendBook .flex{
+  position: relative;
+}
+
+#recommendBook .shield{
+  position: absolute;
+  inset: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#one:checked ~ .shield{
+    animation: shieldLock1 .3s;
+
+}
+#two:checked ~ .shield{
+    animation: shieldLock2 .3s;
+
+}
+#three:checked ~ .shield{
+    animation: shieldLock3 .3s;
+
+}
+#four:checked ~ .shield{
+    animation: shieldLock4 .3s;
+
+}
+#five:checked ~ .shield{
+    animation: shieldLock5 .3s;
+
+}
+#six:checked ~ .shield{
+    animation: shieldLock6 .3s;
+
+}
+#seven:checked ~ .shield{
+  animation: shieldLock7 .3s;
+}
+
+@keyframes shieldLock1{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock2{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock3{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock4{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock5{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock6{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes shieldLock7{
+  0%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  99%{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  100%{
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+footer{background-color: gray;}
+footer .container{justify-content: space-between; align-items: center;}
+footer .sns span:hover{scale: 1.1;}
+
+.animation{animation: boom 2s ease-in-out infinite; background-image: url('./B-Module/images/images\ \(112\).jpg'); width: 200px; height: 200px; border-radius: 1000px;}
+
+@keyframes boom {
+    50%{scale: 1.5;}
+}

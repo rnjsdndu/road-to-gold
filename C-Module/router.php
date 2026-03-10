@@ -1,0 +1,33 @@
+<?php 
+class Router {
+  static $routes = [];
+  static function path($reqM, $uri, $hdl) {
+    $uri = preg_replace("#\{(.*?)\}#", "([^\/]+)", $uri);
+    return self::$routes[] = [$reqM, "#^($uri)$#", $hdl];
+  }
+
+  static function handleRequest() {
+    $REQUEST_URI = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+    $REQUEST_METHOD = $_SERVER["REQUEST_METHOD"];
+
+    foreach(self::$routes as $r){
+      [$reqM, $uri, $hdl] = $r;
+      if($reqM !== $REQUEST_METHOD) continue;
+      if(preg_match($uri, $REQUEST_URI, $matches)) {
+        array_shift($matches);
+        call_user_func_array($hdl, $matches);
+        return 'suc';
+      }
+    }
+    move('/');
+  }
+}
+
+function get($uri, $hdl) {
+  return Router::path("GET", $uri, $hdl);
+}
+
+function post($uri, $hdl) {
+  return Router::path("POST", $uri, $hdl);
+}
+
