@@ -3,7 +3,7 @@ class Router {
   static $routes = [];
   static function path($reqM, $uri, $hdl) {
     $uri = preg_replace("#\{(.*?)\}#", "([^\/]+)", $uri);
-    return self::$routes[] = [$reqM, "#^($uri)$#", $hdl];
+    return self::$routes[] = [$reqM, "#^$uri$#", $hdl];
   }
 
   static function handleRequest() {

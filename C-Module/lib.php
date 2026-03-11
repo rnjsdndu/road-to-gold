@@ -10,6 +10,6 @@ function view($page) {
 }
 
 function move($uri, $msg = null) {
-  return "<script>alert('$msg')</script>";
-  return "<script>location.href('$uri')</script>";
+  echo "<script>alert('$msg')</script>";
+  echo "<script>location.href = '$uri'</script>";
 }

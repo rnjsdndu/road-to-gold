@@ -35,6 +35,10 @@
 
           <nav>
             <ul>
+              <?php if(ss() == 'admin'):?>
+                <li><a href="/addBook">신규도서등록</a></li>
+                <li><a href="/viewRent">대출/열람실 업무조회</a></li>
+              <?php else:;?>
               <li class="rel">
                 <label for="navOne">도서관소개</label>
 
@@ -53,7 +57,7 @@
                 <span class="abs">-</span>
                 <span class="abs">+</span>
                 <ul class="sub">
-                  <li><a href="#">자료실</a></li>
+                  <li><a href="/dataRoom">자료실</a></li>
                   <li><a href="#">열람실예약</a></li>
                 </ul>
               </li>
@@ -65,7 +69,7 @@
                 <span class="abs">+</span>
                 <ul class="sub">
                   <li><a href="#">회원가입</a></li>
-                  <li><a href="#">마이페이지</a></li>
+                  <li><a href="/myPage">마이페이지</a></li>
                 </ul>
               </li>
               <li>
@@ -74,24 +78,34 @@
               <li>
                 <a href="#">도서관리자</a>
               </li>
+              <?php endif;?>
             </ul>
           </nav>
+          <?php 
+            $user = ss();
+            $sql = DB::fetch("select * from users where id = '$user'");
 
+          ?>
           <div class="util">
+            <?php if(ss()):?>
+            <p><?=$sql -> name?> (<?=$sql -> id?>)</p> |
+            <a href='/logout'>로그아웃</a>
+            <?php elseif(!ss()):;?>
             <label for="loginPopupInput">로그인</label> |
             <span class="joinBtn">회원가입</span>
+            <?php endif;?>
           </div>
 
           <input type="checkbox" id="loginPopupInput" />
 
           <div class="loginPopup">
-            <div class="loginPopupContent">
+            <form class="loginPopupContent" action="/loginBack" method="post">
               <h2>로그인 팝업</h2>
               <input type="text" name="id" />
               <input type="text" name="password" />
               <button>Login</button>
               <label for="loginPopupInput">Close</label>
-            </div>
+            </form>
           </div>
 
           <div class="joinPopup">
