@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./asset/css/style.css" />
-    <link rel="stylesheet" href="../공통제공파일/fontawesome/css/all.min.css" />
+    <link rel="stylesheet" href="./asset/fontawesome/css/all.min.css" />
   </head>
   <body>
     <div id="app">
@@ -25,7 +25,7 @@
 
       <header>
         <div class="container">
-          <a href="/index">
+          <a href="/">
             <img
               src="./asset/image/logo.png"
               alt="logo"
