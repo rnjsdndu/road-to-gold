@@ -124,6 +124,7 @@
   <script>
     const $joinBtn = document.querySelector('.joinBtn');
     const $joinModalCloseBtn = document.querySelector('.joinModalCloseBtn')
+    document.querySelector('.joinPopup').style.display = 'none'
 
     $joinBtn.addEventListener('click',() =>{
       document.querySelector('.joinPopup').style.display = 'block'

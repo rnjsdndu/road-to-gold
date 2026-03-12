@@ -51,4 +51,26 @@ get('/viewRent', function() {
 
 post('/addBookBack', function() {
   extract($_POST);
+  $img = $_FILES['image']['name'];
+  $tmp = $_FILES['image']['tmp_name'];
+
+  if(!$title || !$author || !$publisher || !$date || !$date) return move('/addBook', '빈 칸을 입력해주세요');
+  if(!$img) return move('/addBook', '이미지를 등록해주세요');
+
+  DB::exec("insert into book (title, author, publisher, date, price) values ('$title', '$author', '$publisher', '$date', '$price')");
+  move_uploaded_file($tmp, "./book/$img");
+  move('/addBook', '등록 성공');
+
+});
+
+get('/dataRoom', function() {
+  view('dataRoom');
+});
+
+post('/rentBack', function() {
+  extract($_POST);
+  $user = ss();
+  $date = date('Y-m-d');
+  DB::exec("update book set rentState = 'O', rentAt = '$date', rentUserId = '$user' where idx = '$idx'");
+  move('/dataRoom', '대출되었습니다');
 });
