@@ -78,3 +78,24 @@ post('/rentBack', function() {
 get('/insert', function() {
   view('insert');
 });
+
+post('/returnBack', function() {
+  extract($_POST);
+  DB::exec("update book set rentState = '', rentAt = '', rentUserId = '' where idx = '$idx'");
+  move('/myPage', '반납되었습니다.');
+});
+
+get('/popupManage', function() {
+  view('/popupManage');
+});
+
+get('/popupPostIdx', function() {
+  view('/popupManage');
+});
+
+post('/insertPopup', function() {
+  extract($_POST);
+  
+  DB::exec("insert into (title, description, popupStart, popupEnd) values ('$title', '$description', '$popupStart', '$popupEnd')");
+  move('/popupManage', '등록되었습니다');
+});

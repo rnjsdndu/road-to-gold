@@ -38,6 +38,7 @@
               <?php if(ss() == 'admin'):?>
                 <li><a href="/addBook">신규도서등록</a></li>
                 <li><a href="/viewRent">대출/열람실 업무조회</a></li>
+                <li><a href="/popupManage">팝업관리</a></li>
               <?php else:;?>
               <li class="rel">
                 <label for="navOne">도서관소개</label>
