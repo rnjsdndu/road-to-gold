@@ -32,17 +32,3 @@
       <?php endforeach; ?>
     </table>
 </div>
-
-<?php 
-// $str = file_get_contents('../도서정보.json');
-// $json = json_decode($str);
-// foreach($json as $j):
-//   extract((array) $j);
-
-//   $서명 = addslashes($서명);
-//   $저자 = addslashes($저자);
-//   $발행년 = addslashes($발행년);
-//   $가격 = addslashes($가격);
-//   $date = date('Y-m-d');
-//   DB::exec("insert into book (title, author, date, price) values ('$서명', '$저자', '$발행년', '$가격')");
-// endforeach;

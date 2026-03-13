@@ -74,3 +74,7 @@ post('/rentBack', function() {
   DB::exec("update book set rentState = 'O', rentAt = '$date', rentUserId = '$user' where idx = '$idx'");
   move('/dataRoom', '대출되었습니다');
 });
+
+get('/insert', function() {
+  view('insert');
+});

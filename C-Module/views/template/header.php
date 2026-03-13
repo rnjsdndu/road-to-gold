@@ -90,6 +90,7 @@
             <?php if(ss()):?>
             <p><?=$sql -> name?> (<?=$sql -> id?>)</p> |
             <a href='/logout'>로그아웃</a>
+            <a href="/myPage">마이페이지</a>
             <?php elseif(!ss()):;?>
             <label for="loginPopupInput">로그인</label> |
             <span class="joinBtn">회원가입</span>
