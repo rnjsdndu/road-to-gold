@@ -1,3 +1,5 @@
+<?php $sql = DB::fetchAll("select * from book"); $date = new DateTimeImmutable() ?>
+
 <div id="viewRent">
   <h1>도서대출현황</h1>
   <table>
@@ -13,18 +15,27 @@
     </tr>
     <?php foreach($sql as $s):?>
       <tr>
-        <td><?= $s -> title?></td>
-        <td><?= $s -> author?></td>
-        <td><?= $s -> publisher?></td>
-        <td><?= $s -> rentAt?></td>
-        <td><?= $s -> returnDate?></td> 반납일
-        <td><?= $s -> id?></td>
+        <td><?=$s-> title?></td>
+        <td><?= $s->author?></td>
+        <td><?=$s -> publisher?></td>
+        <td><?= $s -> rentAt ?></td>
+        <td><?= $s -> rentAt ? (new DateTime($s -> rentAt))-> modify("+10 days") -> format('Y-m-d') : ''?></td>
         <td>
-          <form action="/return" method="post">
-            <input type="hidden" name="idx" value ="<?= $s -> idx?>">
-            <input type="hidden" name="id" value ="<?= $s -> id?>">
-            <button>반납</button>
+        <?php 
+          $rentDate = new DateTimeImmutable($s -> rentAt);
+          $rentAt = $rentDate -> modify('+10 days');
+          $diff = date_diff($date, $rentAt);
+          echo $s -> rentAt ? $diff -> invert ? -$diff -> days : $diff->days : '' ;
+        ?>
+      </td>
+        <td><?= $s -> rentUserId?></td>
+        <td>
+          <form action="/adminReturn" method="post">
+            <input type="hidden" name="idx" value="<?= $s-> idx?>">
+            <input type="hidden" name="rentUserId" value="<?= $s-> rentUserId?>">
+            <button <?=$s->rentAt ? '' : 'disabled'?>>반납</button>
           </form>
+
         </td>
       </tr>
     <?php endforeach; ?>
@@ -48,8 +59,8 @@
         <td><?= $r -> id?></td>
         <td>
           <form action="/cancleReserve" method="post">
-            <input type="hidden" name="idx" value="<?= $s -> idx?>">
-            <input type="hidden" name="id" value="<?= $s -> id?>">
+            <input type="hidden" name="idx" value="<?= $r -> idx?>">
+            <input type="hidden" name="id" value="<?= $r -> id?>">
             <button>취소</button>
           </form>
         </td>

@@ -124,3 +124,9 @@ post('/popupDelete', function() {
   DB::exec("delete from popup where idx = $idx");
   move('/popupManage', '삭제되었습니다');
 });
+
+post('/adminReturn', function() {
+  extract($_POST);
+  DB::exec("update book set rentState = '', rentAt = '', rentUserId = '' where idx = '$idx' and rentUserId = '$rentUserId'");
+  move('/viewRent', '반납되었습니다.');
+});
