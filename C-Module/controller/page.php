@@ -95,7 +95,32 @@ get('/popupPostIdx', function() {
 
 post('/insertPopup', function() {
   extract($_POST);
-  
-  DB::exec("insert into (title, description, popupStart, popupEnd) values ('$title', '$description', '$popupStart', '$popupEnd')");
+  $image = $_FILES['image']['name'];
+  $tmp = $_FILES['image']['tmp_name'];
+  move_uploaded_file($tmp, "./popup/$image");  
+  DB::exec("insert into popup (title, description, image, popupStart, popupEnd) values ('$title', '$description', '$image', '$popupStart', '$popupEnd')");
   move('/popupManage', '등록되었습니다');
+});
+
+post('/popupUpdate', function() {
+  extract($_POST);
+
+  $file = $_FILES['image'] ?? 0;
+  $image = $oldImage;
+
+
+  if($file && $file['name']) {
+    $image = $file['name'];
+    move_uploaded_file($file['tmp_name'], "./popup/$image");
+  }
+
+  DB::exec("update popup set title = '$title', description = '$description', popupStart = '$popupStart', popupend = '$popupEnd', image = '$image'");
+  move('/popupManage', '수정되었습니다.');
+});
+
+post('/popupDelete', function() {
+  extract($_POST);
+
+  DB::exec("delete from popup where idx = $idx");
+  move('/popupManage', '삭제되었습니다');
 });

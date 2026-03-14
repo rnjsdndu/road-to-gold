@@ -1,3 +1,27 @@
+      <!-- <input type="checkbox" id="guideModalInput" checked> -->
+      <!-- <div class="guideModalContent">
+        <img src="./asset/image/images (6).png" alt="logo" title="logo">
+        <h2>2025년 지방기능경기대회 참가원서 접수 공고사항을 아래 같이 알려드립니다.</h2>
+          <ul>
+            <li>□ 접수기간 : 2025. 1. 13.(월) ～ 1. 24.(금) 18:00 마감 [12일간]</li>
+            <li>□ 대상직종 : 웹디자인및개발 등 48개 직종</li>
+            <li>□ 접수방법 : 마이스터넷 홈페이지 인터넷 접수</li>
+          </ul>
+          <label for="guideModalInput" class="modalClose">닫기</label>
+      </div> -->
+            
+      <?php $date = date('Y-m-d'); $sql = DB::fetchAll("select * from popup");
+        foreach($sql as $s):?>
+        <div class="guideModalContent <?=($s -> popupStart <= $date) && ($s -> popupEnd >= $date) ? '' : 'none'?>">
+          <img src="./popup/<?=$s -> image?>" alt="popupImage" title="popupImage">
+          <h2><?=$s -> title?></h2>
+          <h4><?=$s -> description?></h4>
+          <span class="popupCloseBtn">닫기</span>
+        </div>
+      <?php endforeach; ?>
+
+        
+
 
       <div id="visual" class="w100">
         <div class="slideBox">
@@ -520,3 +544,18 @@
 
       </div>
         </div>
+
+        <script>
+          const $popupCloseBtn = document.querySelectorAll('.popupCloseBtn');
+          $popupCloseBtn.forEach(btn=>{
+            btn.addEventListener("click", (e)=>{
+              console.log(e.target.parentNode.remove())
+              // render();
+            })
+
+          })
+          //     const popupBack = document.querySelector('')
+          // function render() {
+            
+          // }
+        </script>
